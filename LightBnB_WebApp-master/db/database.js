@@ -94,12 +94,7 @@ const getAllReservations = function(guest_id, limit = 10) {
     name: 'get-all-reservations',
     text: `SELECT 
     reservations.id, 
-    properties.title, 
-    properties.cost_per_night, 
-    properties.number_of_bedrooms, 
-    properties.number_of_bathrooms, 
-    properties.parking_spaces,
-    properties.thumbnail_photo_url, 
+    properties.*, 
     reservations.start_date, 
     avg(rating) as average_rating, 
     reservations.start_date, 
