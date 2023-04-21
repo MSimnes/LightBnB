@@ -1,4 +1,5 @@
 # LightBnB
+LightBnB is a mock property rental website. It performs various typical SQL queries and returns data using server-side JavaScript to the front end. The program uses node.js/express, PostgreSQL and JQuery along with a number of dependencies listed below.
 
 ## Project Structure
 
@@ -40,9 +41,10 @@
 └── server.js
 ```
 
+* `1_queries` contains sql queries used when forming the database. Some have been modified and used in database.js
 * `db` contains all the database interaction code.
   * `json` is a directory that contains a bunch of dummy data in `.json` files.
-  * `database.js` is responsible for all queries to the database. It doesn't currently connect to any database, all it does is return data from `.json` files.
+  * `database.js` is responsible for all queries to the database. It connects to the lightbnb database.
 * `public` contains all of the HTML, CSS, and client side JavaScript. 
   * `index.html` is the entry point to the application. It's the only html page because this is a single page application.
   * `javascript` contains all of the client side javascript files.
@@ -53,3 +55,22 @@
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+* `migrations` contains the schema and sql used to create tables.
+* `seeds` contains the data used in the lightbnb database.
+
+## Dependencies
+
+- Node.js
+- Express
+- pg
+- bcryptjs
+- cookie-session
+- nodemon
+
+## Getting Started
+
+- Install all dependencies (using the `npm install` command).
+- Run the development web server using the `npm run local` command.
+- Go to `localhost:3000` to view the page.
+
+## Functionality
