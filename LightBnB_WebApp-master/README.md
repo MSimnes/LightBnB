@@ -1,5 +1,5 @@
 # LightBnB
-LightBnB is a mock property rental website. It performs various typical SQL queries and returns data using server-side JavaScript to the front end. The program uses node.js/express, PostgreSQL and JQuery along with a number of dependencies listed below.
+LightBnB is a mock property rental website. It performs various SQL queries and returns data using server-side JavaScript to the front end. The program uses node.js/express, PostgreSQL and JQuery along with a number of dependencies listed below.
 
 ## Project Structure
 
@@ -74,3 +74,9 @@ LightBnB is a mock property rental website. It performs various typical SQL quer
 - Go to `localhost:3000` to view the page.
 
 ## Functionality
+- Users can sign up and log in.
+- Users can search by city, minimum price, maximum price and minimum rating. User can also search for any one of these alone.
+- Users can create a listing that is stored and searchable in the database.
+- Users can see their listings and reservations under the 'My Listings' and My Reservations' links.
+- Each property displayed includes the number of bedrooms, bathrooms and parking spaces as well as the average rating and cost per night using data retrieved from the lightbnb database.
+- Users can log out.
