@@ -25,7 +25,6 @@ const getUserWithEmail = function(email) {
     .query(queryString, [email])
     .then((result) => {
       const user = result.rows[0];
-      console.log('user:', user);
       return user;
     })
     .catch((err) => {
