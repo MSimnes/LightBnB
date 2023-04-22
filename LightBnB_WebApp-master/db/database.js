@@ -64,8 +64,7 @@ const addUser = function(user) {
   const values = [user.name, user.email, user.password];
   const queryString = `
     INSERT INTO users(name, email, password) 
-    VALUES($1, $2, $3)
-  `;
+    VALUES($1, $2, $3)`;
   return pool
     .query(queryString, values)
     .then((result) => {
@@ -100,8 +99,7 @@ const getAllReservations = function(guest_id, limit = 10) {
     WHERE reservations.guest_id = $1
     GROUP BY properties.id, reservations.id
     ORDER BY reservations.start_date
-    LIMIT $2;`
-  ;
+    LIMIT $2;`;
   const values = [guest_id, limit];
   return pool
     .query(queryString, values)
@@ -123,35 +121,34 @@ const getAllReservations = function(guest_id, limit = 10) {
  */
 const getAllProperties = (options, limit = 10) => {
   const queryParams = [];
-
-  let queryString = `
+  const queryString = `
   SELECT properties.*, avg(property_reviews.rating) as average_rating
   FROM properties
   JOIN property_reviews ON properties.id = property_id
-  WHERE 1 = 1
-  `;
-
+  WHERE 1 = 1`;
+  // given city return only properties in that city
   if (options.city) {
     queryParams.push(`%${options.city}%`);
     queryString += `AND city ILIKE $${queryParams.length} `;
   }
-  // if owner_id return properties belonging to that owner
+  // given owner_id return properties belonging to that owner
   if (options.owner_id) {
     queryParams.push(`${options.owner_id}`);
     queryString += `AND properties.owner_id = $${queryParams.length} `;
   }
-  // if min-price, only return properties above that price
+  // given min-price return only properties above that price
   if (options.minimum_price_per_night) {
     queryParams.push(options.minimum_price_per_night * 100);
     queryString += `AND cost_per_night >= $${queryParams.length} `;
   }
-  // if max-price, only return properties below that price
+  // given max-price return only properties below that price
   if (options.maximum_price_per_night) {
     queryParams.push(`${options.maximum_price_per_night * 100} `);
     queryString += `AND properties.cost_per_night <= $${queryParams.length} `;
   }
+  // added to any queries below
   queryString += `GROUP BY properties.id `;
-  // if minimum_rating only return properties >= to minimum_rating
+  // given minimum_rating return only properties >= to minimum_rating
   if (options.minimum_rating) {
     queryParams.push(`${options.minimum_rating} `);
     queryString += `HAVING average_rating >= $${queryParams.length} `;
@@ -160,10 +157,8 @@ const getAllProperties = (options, limit = 10) => {
   queryParams.push(limit);
   queryString += `
   ORDER BY cost_per_night
-  LIMIT $${queryParams.length};
-  `;
-  // console.log("params---", queryParams, "queryString ---", queryString);
-
+  LIMIT $${queryParams.length};`;
+  
   return pool
     .query(queryString, queryParams)
     .then((result) => {
